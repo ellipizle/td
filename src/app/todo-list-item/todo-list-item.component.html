@@ -3,6 +3,7 @@
   <label>{{todo.title}}</label>
     <div *ngIf="!todo.complete">
   <app-timer [todo]="todo"  (updateTimeSpent)="updateTodo($event)"></app-timer>
+      <span class="remain-label" *ngIf="todo.timeSpent"> time spent : {{todo.timeSpent | timerDuration}}</span> 
   </div>
   <button class="destroy" (click)="removeTodo(todo)"></button>
 </div>
