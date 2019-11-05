@@ -12,15 +12,17 @@ export class TimerComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();
   running: boolean = false // running state;
   timeTotal: number = 1800 // 30min in seconds;
-  timeRemaining: number = 0;
   interval = 1000 // 1 seconds
   _todo: Todo
+
+  animateValue: any = "";
 
 
   @Input()
   set todo(todo: Todo) {
     console.log(todo)
     this._todo = todo;
+
   }
 
   @Output() updateTimeSpent = new EventEmitter()
@@ -38,7 +40,7 @@ export class TimerComponent implements OnInit, OnDestroy {
       scan(acc => acc - 1, this._todo.timeRemaining ? this._todo.timeRemaining : this.timeTotal),
       tap(timeValue => this.computeTiming(timeValue)),
     ).subscribe(value => {
-     console.log(value)
+      this.calculateLoaderTime()
     })
   }
 
@@ -53,6 +55,21 @@ export class TimerComponent implements OnInit, OnDestroy {
   computeTiming(timeValue) {
     this._todo.timeRemaining = timeValue
     this._todo.timeSpent = this.timeTotal - this._todo.timeRemaining;
+  }
+
+  calculateLoaderTime() {
+    const PI = Math.PI;
+    const fullPie = this.timeTotal;
+    const halfPie = fullPie / 2;
+
+    this._todo.timeSpent %= fullPie;
+    const r = (this._todo.timeSpent * PI / halfPie);
+    const x = Math.sin(r) * 125;
+    const y = Math.cos(r) * - 125;
+    const mid = (this._todo.timeSpent > halfPie) ? 1 : 0;
+    const anim = 'M 0 0 v -125 A 125 125 1 ' + mid + ' 1 ' + x + ' ' + y + ' z';
+
+    this.animateValue = anim;
   }
 
   ngOnDestroy() {
