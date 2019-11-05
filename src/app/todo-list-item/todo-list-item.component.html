@@ -2,7 +2,7 @@
   <input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">
   <label>{{todo.title}}</label>
     <div *ngIf="!todo.complete">
-  <app-timer [todo]="todo"></app-timer>
+  <app-timer [todo]="todo"  (updateTimeSpent)="updateTodo($event)"></app-timer>
   </div>
   <button class="destroy" (click)="removeTodo(todo)"></button>
 </div>

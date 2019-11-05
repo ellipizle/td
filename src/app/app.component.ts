@@ -21,9 +21,9 @@ export class AppComponent implements OnInit {
     this.todoDataService
       .getAllTodos()
       .subscribe(
-        (todos) => {
-          this.todos = todos;
-        }
+      (todos) => {
+        this.todos = todos;
+      }
       );
   }
 
@@ -31,9 +31,9 @@ export class AppComponent implements OnInit {
     this.todoDataService
       .addTodo(todo)
       .subscribe(
-        (newTodo) => {
-          this.todos = this.todos.concat(newTodo);
-        }
+      (newTodo) => {
+        this.todos = this.todos.concat(newTodo);
+      }
       );
   }
 
@@ -41,9 +41,9 @@ export class AppComponent implements OnInit {
     this.todoDataService
       .toggleTodoComplete(todo)
       .subscribe(
-        (updatedTodo) => {
-          todo = updatedTodo;
-        }
+      (updatedTodo) => {
+        todo = updatedTodo;
+      }
       );
   }
 
@@ -51,9 +51,19 @@ export class AppComponent implements OnInit {
     this.todoDataService
       .deleteTodoById(todo.id)
       .subscribe(
-        (_) => {
-          this.todos = this.todos.filter((t) => t.id !== todo.id);
-        }
+      (_) => {
+        this.todos = this.todos.filter((t) => t.id !== todo.id);
+      }
+      );
+  }
+
+  onUpdateTodo(todo) {
+    this.todoDataService
+      .updateTodo(todo)
+      .subscribe(
+      (updatedTodo) => {
+        todo = updatedTodo;
+      }
       );
   }
 }

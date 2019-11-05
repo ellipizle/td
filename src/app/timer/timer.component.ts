@@ -12,6 +12,7 @@ export class TimerComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();
   running: boolean = false // running state;
   timeTotal: number = 1800 // 30min in seconds;
+  timeRemaining: number = 0;
   interval = 1000 // 1 seconds
   _todo: Todo
 
@@ -22,6 +23,7 @@ export class TimerComponent implements OnInit, OnDestroy {
     this._todo = todo;
   }
 
+  @Output() updateTimeSpent = new EventEmitter()
 
   constructor() { }
   ngOnInit() {
@@ -42,6 +44,9 @@ export class TimerComponent implements OnInit, OnDestroy {
 
   toggle() {
     this.running = !this.running
+    if (!this.running) {
+      this.updateTimeSpent.emit(this._todo)
+    }
     this.timer$.next(this.running)
   }
 
