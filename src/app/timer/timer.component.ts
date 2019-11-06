@@ -22,7 +22,7 @@ export class TimerComponent implements OnInit, OnDestroy {
   set todo(todo: Todo) {
     console.log(todo)
     this._todo = todo;
-    if(this._todo.timeSpent){
+    if (this._todo.timeSpent) {
       this.calculateLoaderTime()
     }
   }
@@ -41,6 +41,8 @@ export class TimerComponent implements OnInit, OnDestroy {
       )),
       scan(acc => acc - 1, this._todo.timeRemaining ? this._todo.timeRemaining : this.timeTotal),
       tap(timeValue => this.computeTiming(timeValue)),
+      takeWhile(timeRemaining => timeRemaining > 0),
+      takeUntil(this.unsubscribe$)
     ).subscribe(value => {
       this.calculateLoaderTime()
     })
@@ -57,6 +59,9 @@ export class TimerComponent implements OnInit, OnDestroy {
   computeTiming(timeValue) {
     this._todo.timeRemaining = timeValue
     this._todo.timeSpent = this.timeTotal - this._todo.timeRemaining;
+    if (this._todo.timeSpent == this.timeTotal) {
+      this.updateTimeSpent.emit(this._todo)
+    }
   }
 
   calculateLoaderTime() {
