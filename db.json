@@ -3,7 +3,30 @@
     {
       "title": "my first task",
       "complete": false,
-      "id": 1
+      "id": 1,
+      "timeRemaining": 0,
+      "timeSpent": 1800
+    },
+    {
+      "title": "iceb",
+      "complete": false,
+      "id": 2,
+      "timeRemaining": 1673,
+      "timeSpent": 127
+    },
+    {
+      "title": "s",
+      "complete": false,
+      "id": 3,
+      "timeRemaining": 1796,
+      "timeSpent": 4
+    },
+    {
+      "title": "i",
+      "complete": false,
+      "id": 4,
+      "timeRemaining": 1796,
+      "timeSpent": 4
     }
   ]
 }

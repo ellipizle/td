@@ -1,0 +1,13 @@
+
+<div class="timer-container">
+    <button class="button"  [ngClass]="{'paused': running}" (click)="toggle()"></button>
+  <div class="progress-container">
+    <svg width="250" height="250" viewbox="0 0 250 250">
+      <path id="border" [attr.d]="animateValue" transform="translate(125, 125)"/>
+      <path id="loader" [attr.d]="animateValue" transform="translate(125, 125) scale(.84)"/>
+    </svg>
+  </div>
+</div>
+
+
+
