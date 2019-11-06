@@ -22,7 +22,9 @@ export class TimerComponent implements OnInit, OnDestroy {
   set todo(todo: Todo) {
     console.log(todo)
     this._todo = todo;
-
+    if(this._todo.timeSpent){
+      this.calculateLoaderTime()
+    }
   }
 
   @Output() updateTimeSpent = new EventEmitter()
