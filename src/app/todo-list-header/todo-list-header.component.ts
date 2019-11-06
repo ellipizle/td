@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Todo } from '../todo';
 
 @Component({
@@ -9,6 +9,13 @@ import { Todo } from '../todo';
 export class TodoListHeaderComponent {
 
   newTodo: Todo = new Todo();
+  totalTime: number
+  
+  @Input()
+  set todos(todos: Todo[]) {
+    this.totalTime = todos.map(todo => (todo.timeSpent ? todo.timeSpent : 0)).reduce((acc, val) => acc + val, 0)
+    console.log(this.totalTime)
+  }
 
   @Output()
   add: EventEmitter<Todo> = new EventEmitter();

@@ -1,5 +1,6 @@
 <section class="todoapp">
   <app-todo-list-header
+   [todos]="todos"
     (add)="onAddTodo($event)"
   ></app-todo-list-header>
   <app-todo-list
